@@ -335,3 +335,40 @@ meses.reverse()
   for(let auto in automoviles){
     console.log(`${auto} : ${automoviles[auto]}`)
   }
+
+  const pendiente2 = ['tarea','tarea2','tarea3','tarea4','tarea5']
+
+    pendiente2.forEach( function(pendiente3, index){
+        console.log(`${index}  =>  ${pendiente3}`)
+    })
+  console.log(pendiente2)
+
+  /** iterando un arreglo de objeto */
+
+  const carritoMap = [
+    {id : 1 , producto : 'libro'},
+    {id : 2 , producto : 'libro2'},
+    {id : 3 , producto : 'libro3'},
+    {id : 4 , producto : 'libro4'},
+    {id : 5 , producto : 'libro5'},
+  ]
+  
+
+  const productoMap = carritoMap.map(function(carrito5){
+    return(carrito5.producto)
+  })
+  console.log(productoMap)
+
+  /**================ iterando un objeto con for ===================== */
+
+  const kervis = {
+    edad : 27,
+    sexo : 'masculino',
+    trabajo : 'programador',
+    novia : 'eliza'
+  }
+
+
+  for( let nasa in kervis){
+    console.log(`${nasa} == ${kervis[nasa]}`)
+  }
