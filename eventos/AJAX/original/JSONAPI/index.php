@@ -10,9 +10,9 @@
 </head>
 <body>
     <div class="container">
-        <a href="#" class="button" id="cargar">Cargar</a>
+        <a href="#" class="button" id="cargar">Cargar Posts</a>
         <div id="listado"></div>
-        <script src="app.js"></script>
+        <script src="app2.js"></script>
     </div>
 
 

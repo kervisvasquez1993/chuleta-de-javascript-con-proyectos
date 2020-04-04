@@ -1,0 +1,20 @@
+[
+	{
+	"id" : 1,
+	"nombre" : "kervis vasquez",
+        "empresa" : "medicom venezuela",
+        "trabajo" : "desarrollador web"
+},
+{
+	"id" : 2,
+"nombre" : "kervis2 vasquez",
+"empresa" : "medicom2 venezuela",
+"trabajo" : "desarrollador2 web"
+},
+{
+	"id" : 3,
+"nombre" : "kervis3 vasquez",
+"empresa" : "medicom3 venezuela",
+"trabajo" : "desarrollador web"
+}
+]
