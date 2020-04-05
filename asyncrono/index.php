@@ -9,6 +9,6 @@
 <body>
     <h1>callback</h1>
     <ul id="app"></ul>
-    <script src="script.js"></script>
+    <script src="promesas.js"></script>
 </body>
 </html>
