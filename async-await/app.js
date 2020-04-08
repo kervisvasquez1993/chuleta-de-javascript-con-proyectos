@@ -1,6 +1,7 @@
 async function obtenerClientes()
 {
-    const clientes = new Promise((resolve, reject)=>{
+    const clientes = new Promise((resolve, reject)=>
+    {
             setTimeout(function()
             {
                 resolve(`clientes descargados.`)
