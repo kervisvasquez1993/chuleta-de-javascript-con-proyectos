@@ -53,3 +53,16 @@ const empresa2 = new Empresa(
   "desarrollo"
 );
 console.log(Empresa.bienvenida());
+
+class Interfaz {
+  mostrarMensaje(mensaje, clases) {
+    const div = document.createElement("div");
+    div.className = clases;
+    div.appendChild(document.createTextNode(mensaje));
+    console.log(div);
+  }
+}
+
+const ui = new Interfaz();
+
+ui.mostrarMensaje("esto es una prueba", "kervis");

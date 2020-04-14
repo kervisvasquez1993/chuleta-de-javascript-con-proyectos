@@ -1,9 +1,13 @@
 class Interfaz {
-  mostarMensaje(msj, clases) {
-    let div = document.createElement("div");
+  mostrarMensaje(mensaje, clases) {
+    const div = document.createElement("div");
     div.className = clases;
-
-    div.appendChild(document.createTextNode(msj));
-    console.log(div);
+    div.appendChild(document.createTextNode(mensaje));
+    //selecionar mensaje
+    const divMensaje = document.querySelector(".mensajes");
+    divMensaje.appendChild(div);
+    setTimeout(() => {
+      document.querySelector(".mensajes div").remove();
+    }, 3000);
   }
 }

@@ -12,7 +12,10 @@ formulario.addEventListener("submit", (e) => {
   const criptSelect = criptomoneda.options[criptomoneda.selectedIndex].value;
   //comprobar que ambos esten seleccionado
   if (criptSelect === "" || monedaSelec === "") {
-    iu.mostarMensaje("prueba", "alert");
+    iu.mostrarMensaje(
+      "Ambos campos son Obligatorio",
+      "alert bg-danger text-center"
+    );
   } else {
     console.log("todo bien");
   }
