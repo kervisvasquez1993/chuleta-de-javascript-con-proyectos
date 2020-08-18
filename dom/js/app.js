@@ -70,3 +70,61 @@ console.log(navegacion.children[0].nodeType)
 // 8 = comentario
 // 9 = documents
 // 10 = doctype
+
+const enlacets = document.querySelectorAll('.enlace'),
+cards = document.querySelectorAll('.card')
+//console.log(enlacets[0].parentElement.parentElement)
+//console.log(cards[0].parentElement.parentElement.children[0])
+
+
+
+// ============================== crear elemto desde javascript =======================================
+
+const crearElem = document.createElement('a')
+// agregams clase
+
+crearElem.className = 'enlace'
+crearElem.id = 'nuevoId'
+crearElem.setAttribute('href', '#')
+//añadir text 
+crearElem.textContent ='nuevo enlace desde js'
+
+document.querySelector('#secundaria').appendChild(crearElem)
+console.log(crearElem)
+
+// ================================= reemplazar elemento ===============================================
+
+const nuevoElemento = document.createElement('h2')
+nuevoElemento.id = 'encabezado'
+
+nuevoElemento.appendChild(document.createTextNode('los mejores cursos'))
+// elemeto anterior sera remmplazado 
+const anterior = document.querySelector('#encabezado')
+const padre = document.querySelector('#lista-cursos')
+// remmpaza yendo hacia el padre
+padre.replaceChild(nuevoElemento,anterior)
+console.log(anterior)
+
+
+
+
+// ==================================== eliminar elemento con js ======================================
+
+
+//   tomamos enlaces ya existentes enlaces
+const enlaces2 = document.querySelectorAll('.enlace')
+const navegacion2 = document.querySelector('#principal')
+enlaces2[0].remove // elemento brado
+
+
+
+const primerLi = document.querySelector('.enlace')
+let element3
+
+//obtenet una clase 
+
+element3 = primerLi.className
+element3 = primerLi.classList.add('nueva-clase')
+element3 = primerLi.classList.remove('nueva-clase')
+element3 = primerLi.classList
+console.log(element3)
