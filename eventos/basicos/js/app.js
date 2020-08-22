@@ -12,3 +12,10 @@ document.body.addEventListener('click', (e) => {
   }
 })
 
+
+localStorage.setItem('nombre','kervis')
+
+//localStorage.removeItem('nombre')
+
+const nombre = localStorage.getItem('nombre')
+console.log(nombre)

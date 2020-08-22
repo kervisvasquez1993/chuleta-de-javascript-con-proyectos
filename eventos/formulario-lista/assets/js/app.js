@@ -13,7 +13,7 @@ function eventListener(){
 
     // borrar tweets
 
-    listTweets.addEventListener('click', borrarTweet)
+    listTweets.addEventListener('click', borrarTweet) // delegacion de eventos
         
     document.addEventListener('DOMContentLoaded',localStorageListo )
     
@@ -23,6 +23,8 @@ function eventListener(){
 // funciones
 
 // añadir tweet
+//funcion para crear elemento y añadir al dom element creado
+
 function agregarTweet(e)
     {
     e.preventDefault()
@@ -40,17 +42,22 @@ function agregarTweet(e)
 
          // añade el tweet a la lista 
         listTweets.appendChild(li)
-    // añadir al localstorage
+    
+    
+        // añadir al localstorage del dom 
         agregarTweetLocalStorage(tweet)
     
     }
 
+    // fin  de funcin 
+
     // elimina twee del dom 
+    // delegacion 
     function borrarTweet(e)
     {
         e.preventDefault
        
-        if(e.target.className === 'borrar-tweet')
+        if(e.target.className === 'borrar-tweet') // 
         {
             e.target.parentElement.remove()
             borrarTweetLocalStorage(e.target.parentElement.innerText)
