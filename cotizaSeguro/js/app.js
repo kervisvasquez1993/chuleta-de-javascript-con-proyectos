@@ -49,7 +49,7 @@ function Interzas(){
         if(tipoSeguro === 'error'){
             div.classList.add('mensaje', 'error') 
         }else{
-            div.classList.add('mensaje', 'error')
+            div.classList.add('mensaje', 'error-test')
         }
         div.innerHTML = `${mensaje}`
         formulario.insertBefore(div, document.querySelector('.form-group'))
@@ -58,6 +58,35 @@ function Interzas(){
                 document.querySelector('.mensaje').remove()
         }, 3000)
     }
+}
+// imprime el resultado de la cotizacion
+
+Interzas.prototype.mostraResultado = function(seguro, total){
+    const resultado = document.getElementById('resultado')
+   switch(seguro.marca){
+       case '1':
+           marca = 'Americano'
+           break
+        case '2':
+         marca = 'Asiatico'
+         break
+         
+        case '3':
+           marca = 'Europeo'
+           break
+   }
+
+   const div = document.createElement('div')
+   div.innerHTML = `
+     <p class="header"> Tu resumen: </p>
+     <p>Marca: ${marca},</p>
+     <p>Año: ${seguro.anio},</p>
+     <p>Tipo de Seguro: ${seguro.tipoSeguro}, </p>
+     <p>Total: ${total}</p>
+   `
+
+   resultado.appendChild(div)
+
 }
 
 //event listener
@@ -87,10 +116,16 @@ formulario.addEventListener('submit', (e)=> {
     if(marcaSelecionada === '' || anioSelecionado === '' || tipoRadio === '' ){
         interfaz.mostrarError('Faltan datos, revise el formulario y pruebe de nuevo')
     }else{
+
+        const resultado = document.querySelector('#resultado div')
+       
+        if(resultado != null){
+           resultado.remove()
+        }
         const seguro = new Seguro(marcaSelecionada, anioSelecionado, tipoRadio)
        // cotizar el seguro 
-
-       const cantidad = seguro.cotizarSeguro(seguro)
+       const cantidad = seguro.cotizarSeguro()
+       interfaz.mostraResultado(seguro, cantidad)
     }
 
 })
