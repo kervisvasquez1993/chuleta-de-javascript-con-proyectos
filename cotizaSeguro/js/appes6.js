@@ -1,50 +1,56 @@
 // cotizador constructor para seguro
-function Seguro (marca,anio,tipoSeguro) {
-    this.marca = marca
-    this.anio = anio
-    this.tipoSeguro = tipoSeguro
+class Seguro {
+    constructor(marca,anio,tipoSeguro)
+        {
+          this.marca = marca
+          this.anio = anio
+          this.tipoSeguro = tipoSeguro
+        }
+
+    cotizarSeguro(){
+        // marcas 
+        // 1 = americano 1.15
+        // 2 asiatico 1.05
+        // 3 = europeo 1.35
+        let cantidad
+        const base = 2000
+    
+        switch(this.marca){
+            case '1' :
+                cantidad = base * 1.15
+                break
+            case '2' :
+                cantidad = base * 1.05
+                break    
+            case '3' :
+                cantidad = base * 1.35
+                break    
+        }
+    
+        // leer el año 
+        const diferencia = new Date().getFullYear() - this.anio
+    
+        // cantidad que se debe de pagar 
+        cantidad -= ((diferencia*3)*cantidad) / 100
+    
+        // si el seguro es basico se multiplica por 30 mas 
+        // si es completo 50%
+        if(this.tipoSeguro === 'basico'){
+            cantidad *= 1.30
+        }else{
+            cantidad *= 1.50
+        }
+        return cantidad
+    }
+    
 }
 
-Seguro.prototype.cotizarSeguro = function(informacion){
-    // marcas 
-    // 1 = americano 1.15
-    // 2 asiatico 1.05
-    // 3 = europeo 1.35
-    let cantidad
-    const base = 2000
 
-    switch(this.marca){
-        case '1' :
-            cantidad = base * 1.15
-            break
-        case '2' :
-            cantidad = base * 1.05
-            break    
-        case '3' :
-            cantidad = base * 1.35
-            break    
-    }
-
-    // leer el año 
-    const diferencia = new Date().getFullYear() - this.anio
-
-    // cantidad que se debe de pagar 
-    cantidad -= ((diferencia*3)*cantidad) / 100
-
-    // si el seguro es basico se multiplica por 30 mas 
-    // si es completo 50%
-    if(this.tipoSeguro === 'basico'){
-        cantidad *= 1.30
-    }else{
-        cantidad *= 1.50
-    }
-    return cantidad
-}
 // todo lo que se muestra
-function Interzas(){
+class  Interzas{
 
     // mensaje que se imprime en el html
-    Interzas.prototype.mostrarError = function(mensaje, tipoSeguro){
+    mostrarError(mensaje, tipoSeguro){
         const div = document.createElement('div')
         if(tipoSeguro === 'error'){
             div.classList.add('mensaje', 'error') 
@@ -58,37 +64,39 @@ function Interzas(){
                 document.querySelector('.mensaje').remove()
         }, 3000)
     }
+
+    mostraResultado(seguro, total){
+        const resultado = document.getElementById('resultado')
+        let marca
+       switch(seguro.marca){
+           case '1':
+               marca = 'Americano'
+               break
+            case '2':
+             marca = 'Asiatico'
+             break
+             
+            case '3':
+               marca = 'Europeo'
+               break
+       }
+    
+       const div = document.createElement('div')
+       div.innerHTML = `
+         <p class="header"> Tu resumen: </p>
+         <p>Marca: ${marca},</p>
+         <p>Año: ${seguro.anio},</p>
+         <p>Tipo de Seguro: ${seguro.tipoSeguro}, </p>
+         <p>Total: ${total}</p>
+       `
+    
+       resultado.appendChild(div)
+    
+    }
 }
 // imprime el resultado de la cotizacion
 
-Interzas.prototype.mostraResultado = function(seguro, total){
-    const resultado = document.getElementById('resultado')
-    let marca
-   switch(seguro.marca){
-       case '1':
-           marca = 'Americano'
-           break
-        case '2':
-         marca = 'Asiatico'
-         break
-         
-        case '3':
-           marca = 'Europeo'
-           break
-   }
 
-   const div = document.createElement('div')
-   div.innerHTML = `
-     <p class="header"> Tu resumen: </p>
-     <p>Marca: ${marca},</p>
-     <p>Año: ${seguro.anio},</p>
-     <p>Tipo de Seguro: ${seguro.tipoSeguro}, </p>
-     <p>Total: ${total}</p>
-   `
-
-   resultado.appendChild(div)
-
-}
 
 //event listener
 const formulario = document.getElementById('cotizar-seguro')
@@ -110,6 +118,11 @@ formulario.addEventListener('submit', (e)=> {
 
     // instacia de interfaz
     
+    
+    
+    
+    
+    
     const interfaz = new Interzas()
 
     // revisams que los campos no estan vacios
@@ -126,6 +139,8 @@ formulario.addEventListener('submit', (e)=> {
         const seguro = new Seguro(marcaSelecionada, anioSelecionado, tipoRadio)
        // cotizar el seguro 
        const cantidad = seguro.cotizarSeguro()
+       
+       
        interfaz.mostraResultado(seguro, cantidad)
     }
 
