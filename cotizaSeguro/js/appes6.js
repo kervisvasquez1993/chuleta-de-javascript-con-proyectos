@@ -102,7 +102,7 @@ class  Interzas{
 const formulario = document.getElementById('cotizar-seguro')
 
 formulario.addEventListener('submit', (e)=> {
-   e.preventDefault
+   e.preventDefault()
     // leer la marca seleccionada del select
    const marca = document.getElementById('marca')
    const marcaSelecionada = marca.options[marca.selectedIndex].value
