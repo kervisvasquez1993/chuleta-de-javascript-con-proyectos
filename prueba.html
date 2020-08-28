@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="padre">
+        <div class="hijo">
+            <div class="contenido">esto es una prueba</div>
+            
+        </div>
+        <a href="#" id="boton">boton</a>
+    </div>
+
+    <script>
+        let testInseret= document.querySelector('.testInsert')
+        let contenido = document.querySelector('.contenido')
+        boton = document.getElementById('boton')
+        boton.addEventListener('click', (e)=>{
+            e.preventDefault()
+            let clon = contenido.cloneNode('contenido') 
+            let padre = contenido.parentElement
+            padre.append(clon)
+            
+            
+        })
+        
+       
+    </script>
+</body>
+</html>
