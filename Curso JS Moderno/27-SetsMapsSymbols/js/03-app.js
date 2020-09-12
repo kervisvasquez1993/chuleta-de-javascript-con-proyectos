@@ -14,3 +14,6 @@ console.log(map)
 
 const map2 = new Map([ ['nombre', 'kervis'], ['tipo de paciente', 'con covid-19'] ])
 console.log(map2)
+
+
+map
