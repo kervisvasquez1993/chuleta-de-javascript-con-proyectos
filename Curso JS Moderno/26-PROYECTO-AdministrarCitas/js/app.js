@@ -15,6 +15,12 @@ class Citas {
         constructor(){
             this.citas = []
         }
+
+        agregarCita(cita){
+            this.citas = [...this.citas,cita]
+
+            console.log(this.citas)
+        }
 }
 
 class UI {
@@ -73,6 +79,7 @@ const citasObj = {
 // AGREGA DATOS AL OBJETO DE CITAS 
 function datosCitas(e){
    citasObj[e.target.name] /* acceder a las prpiedades */ = e.target.value 
+ 
 
 }
 
@@ -83,10 +90,31 @@ function nuevaCita(e){
     // extraer la infrmacion del objeto
     const {mascota, propietario, telefono, fecha, hora,sintomas,} = citasObj
     // validad 
-    if(mascota === '' || propietario === '' || telefono === '' || fecha === '' || hora === '' || sintomas){
+    if(mascota === '' || propietario === '' || telefono === '' || fecha === '' || hora === '' || sintomas === '')
+    {
         ui.imprimirAlerta('todos los campos son Obligatorio', 'error')
         return
     } 
 
-    
+    // generar ID
+    citasObj.id = Date.now()
+
+    // creando una nueva cita
+
+
+
+    administrarCitas.agregarCita({...citasObj}) // {...citasObj} es para tomar una copia del objeto
+     // reiniciar objeto para la validacion 
+     reiniciarObjeto()
+     formulario.reset()
+}
+
+
+function reiniciarObjeto(){
+    citasObj.mascota = '',
+    citasObj.propietario = '',
+    citasObj.telefono = '',
+    citasObj.fecha = '',
+    citasObj.hora = '',
+    citasObj.sintomas = ''
 }
