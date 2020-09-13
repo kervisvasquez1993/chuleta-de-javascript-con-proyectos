@@ -10,6 +10,7 @@ const sintomasInput    =   document.querySelector('#sintomas')
 const formulario       =   document.querySelector('#nueva-cita')
 const contenedorCitas       =   document.querySelector('#citas')
 
+let editando
 
 class Citas {
         constructor(){
@@ -25,6 +26,10 @@ class Citas {
         eliminarCita(id)
         {
             this.citas = this.citas.filter(cita => cita.id !== id)
+        }
+
+        editarCita(citaActualizada){
+            this.citas = this.citas.map( cita => cita.id === citaActualizada.id ? citaActualizada : cita) // itera en cada item si son iguales esa es la cita que estan editando y se actualiza la cita
         }
 }
 
@@ -107,9 +112,16 @@ class UI {
               </svg> `
 
                 btnELiminar.onclick =() => eliminarCita(id)
-                {
-
-                }
+                
+                //añadir botn para editar cita
+                const btnEditar = document.createElement('button')
+                btnEditar.classList.add('btn','btn-info')
+                btnEditar.innerHTML = `
+                Editar <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+                `
+                btnEditar.onclick = () => cargarEdicion(cita)
 
                 divCita.appendChild(mascotaParrafo)
                 divCita.appendChild(propietarioParrafo)
@@ -118,6 +130,7 @@ class UI {
                 divCita.appendChild(horaParrafo)
                 divCita.appendChild(sintomaParrafo)
                 divCita.appendChild(btnELiminar)
+                divCita.appendChild(btnEditar)
 
                 contenedorCitas.appendChild(divCita)
             })
@@ -181,14 +194,32 @@ function nuevaCita(e){
         return
     } 
 
-    // generar ID
-    citasObj.id = Date.now()
 
-    // creando una nueva cita
+    //editando
+
+    if(editando)
+    {
+        ui.imprimirAlerta('Editado Correctamente')
+        // pasar el objeto de la cita a edicion 
+        administrarCitas.editarCita({...citasObj}) // pasamso una copia de citasObj
 
 
+        //rescribir el text del frmulari a su valor original
+        formulario.querySelector('button[type="submit"]').textContent = 'Crear Cita'
+        editando = false
+        
+    }
+    else{
+        // generar ID
+         citasObj.id = Date.now()
+        // creando una nueva cita
+        administrarCitas.agregarCita({...citasObj}) // {...citasObj} es para tomar una copia del objeto
+        //mensaje de agregad correctamente
+        ui.imprimirAlerta('Se agrego correctamente')
 
-    administrarCitas.agregarCita({...citasObj}) // {...citasObj} es para tomar una copia del objeto
+    }
+
+   
      // reiniciar objeto para la validacion 
      reiniciarObjeto()
      formulario.reset()
@@ -220,4 +251,33 @@ function eliminarCita(id){
     // refrescar
 
     ui.imprimirCitas(administrarCitas)
+}
+
+
+function cargarEdicion(cita)
+{
+    const {mascota, propietario , telefono , fecha , hora , sintomas, id } = cita
+    
+    //llenar ls input
+
+     mascotaInput.value       =   mascota
+     propietarioInput.value   =   propietario
+     telefonoInput.value      =   telefono
+     fechaInput.value         =   fecha
+     horaInput.value          =   hora
+     sintomasInput.value      =   sintomas
+     
+     //LLENAR EL OBJET
+     citasObj.mascota     = mascota
+     citasObj.propietario = propietario
+     citasObj.telefono    = telefono
+     citasObj.fecha       = fecha
+     citasObj.hora        = hora
+     citasObj.sintomas    = sintomas
+     citasObj.id          = id
+
+     // CAMBIAR EL NOMBRE DEL BOTOM
+
+     formulario.querySelector('button[type="submit"]').textContent = 'Guardar Cambios'
+    editando = true
 }
