@@ -19,11 +19,19 @@ class Citas {
         agregarCita(cita){
             this.citas = [...this.citas,cita]
 
-            console.log(this.citas)
+        
+        }
+
+        eliminarCita(id)
+        {
+            this.citas = this.citas.filter(cita => cita.id !== id)
         }
 }
 
 class UI {
+
+
+        
         imprimirAlerta(mensaje,tipoMensaje){
             const divMensaje = document.createElement('div')
             divMensaje.classList.add('text-center','alert', 'd-block','col-12')
@@ -45,6 +53,83 @@ class UI {
                divMensaje.remove()
            }, 5000)
 
+
+        }
+
+        imprimirCitas({citas}) // desectruturando el objeto desde los parametrs
+        { 
+
+            this.linmpiarHTML()
+            citas.forEach( cita => {
+                const {mascota, propietario , telefono , fecha , hora , sintomas, id } = cita
+
+                const divCita = document.createElement('div')
+                divCita.classList.add('cita', 'p-3') 
+                divCita.dataset.id = id
+                //scripting de los elementos de las citas
+                const mascotaParrafo = document.createElement('h3')
+                mascotaParrafo.classList.add('card-title', 'font-weigth-bolder')
+                mascotaParrafo.textContent = mascota
+
+                const propietarioParrafo = document.createElement('p')
+                propietarioParrafo.innerHTML = `
+                    <span class="font-weigth-bolder"> Propietario </span> : ${propietario}
+                `
+
+                const telefonoParrafo = document.createElement('p')
+                telefonoParrafo.innerHTML = `
+                    <span class="font-weigth-bolder"> Teléfono </span> : ${telefono}
+                `
+
+                const fechaParrafo = document.createElement('p')
+                fechaParrafo.innerHTML = `
+                    <span class="font-weigth-bolder"> Fecha </span> : ${fecha}
+                `
+
+                const horaParrafo = document.createElement('p')
+                horaParrafo.innerHTML = `
+                    <span class="font-weigth-bolder"> Hora </span> : ${hora}
+                `
+
+
+                const sintomaParrafo = document.createElement('p')
+                sintomaParrafo.innerHTML = `
+                    <span class="font-weigth-bolder"> Sintomas </span> : ${sintomas}
+                `
+
+
+                // boton para eliminar esta cita
+
+                const btnELiminar = document.createElement('button')
+                btnELiminar.classList.add('btn', 'btn-danger', 'mr-2')
+                btnELiminar.innerHTML = ` ELiminar <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg> `
+
+                btnELiminar.onclick =() => eliminarCita(id)
+                {
+
+                }
+
+                divCita.appendChild(mascotaParrafo)
+                divCita.appendChild(propietarioParrafo)
+                divCita.appendChild(telefonoParrafo)
+                divCita.appendChild(fechaParrafo)
+                divCita.appendChild(horaParrafo)
+                divCita.appendChild(sintomaParrafo)
+                divCita.appendChild(btnELiminar)
+
+                contenedorCitas.appendChild(divCita)
+            })
+
+        }
+
+        linmpiarHTML()
+        {
+            while(contenedorCitas.firstChild){
+                contenedorCitas.removeChild(contenedorCitas.firstChild)
+            }
+            // mientras sea verdadera la condicion vamos ir eliminando cada uno de los hijos del contenedor de citas
         }
 }
 
@@ -107,6 +192,11 @@ function nuevaCita(e){
      // reiniciar objeto para la validacion 
      reiniciarObjeto()
      formulario.reset()
+
+     // mostrar el html de las citas
+
+     ui.imprimirCitas(administrarCitas)
+
 }
 
 
@@ -117,4 +207,17 @@ function reiniciarObjeto(){
     citasObj.fecha = '',
     citasObj.hora = '',
     citasObj.sintomas = ''
+}
+
+
+function eliminarCita(id){
+    //eliminar la cita en la clase principal
+    administrarCitas.eliminarCita(id)
+
+    // mostrar el mansaje
+    ui.imprimirAlerta('La cita se eliminó Correctamente')
+
+    // refrescar
+
+    ui.imprimirCitas(administrarCitas)
 }
