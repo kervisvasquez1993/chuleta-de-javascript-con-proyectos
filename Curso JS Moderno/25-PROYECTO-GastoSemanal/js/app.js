@@ -29,6 +29,12 @@ class PresupuestoSemanal {
         nuevoGasto(gasto){
             
             this.gastos = [...this.gastos, gasto] // tomamos una copia de this.gasto y agregamos gasto
+            this.calculatRestante()
+        }
+
+        calculatRestante(){
+            const gastado = this.gastos.reduce( (total, gasto) => total + gasto.cantidad, 0)
+            this.restante = this.presupuesto - gastado
             
         }
 }
@@ -70,7 +76,7 @@ class UI{
         agregarGastoLista(gastos){
 
             this.limpiarHtml() // elimina el html previo
-            
+
             // iterar sobre los gastos 
            
             gastos.forEach(gasto => {
@@ -98,6 +104,10 @@ class UI{
 
                 gastoSemanal.appendChild(nuevoGastoLista)
             })
+        }
+
+        actualizarRestante(restante){
+            document.querySelector('#restante').textContent = restante
         }
 
         limpiarHtml(){
@@ -145,10 +155,12 @@ function agregarGasto(e){
     ui.imprimirAlerta('Gasto agregado correctamente')
 
     // imprimir los gastos
-    const {gastos} = presupuesto
+    const {gastos, restante} = presupuesto
 
+   
 
     ui.agregarGastoLista(gastos)
+    ui.actualizarRestante(restante)
 
     formulario.reset()
    
