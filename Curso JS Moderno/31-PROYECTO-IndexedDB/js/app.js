@@ -1,4 +1,4 @@
-
+let DB ;
 const mascotaInput = document.querySelector('#mascota');
 const propietarioInput = document.querySelector('#propietario');
 const telefonoInput = document.querySelector('#telefono');
@@ -19,9 +19,14 @@ const heading = document.querySelector('#administra');
 
 let editando = false;
 
+ 
+window.onload = () => {
+    eventListeners();
+    CrearDB()
+}
 
 // Eventos
-eventListeners();
+
 function eventListeners() {
     mascotaInput.addEventListener('change', datosCita);
     propietarioInput.addEventListener('change', datosCita);
@@ -261,5 +266,44 @@ function cargarEdicion(cita) {
     formulario.querySelector('button[type="submit"]').textContent = 'Guardar Cambios';
 
     editando = true;
+
+}
+
+
+function CrearDB(){
+    const crearDB = window.indexedDB.open('citas', 1 )
+    
+    // si hay un error
+    crearDB.onerror = () => {
+        console.log('Hub un error')
+    }
+
+    // si todo sale bien 
+
+    crearDB.onsuccess = () =>{
+        console.log('Bases de datos creadas')
+        DB = crearDB.result
+    }
+
+
+    // este cdigo solo se ejecuta una vez 
+    crearDB.onupgradeneeded = function(e){
+        let db = e.target.result
+        const objectStore = db.createObjectStore('citas', {
+            keyPath : 'id',
+            autoIncrement: true
+        })
+
+        // definir columnas
+        objectStore.createIndex('mascota', 'mascota',         {unique: false })
+        objectStore.createIndex('propietario', 'propietario', {unique: false })
+        objectStore.createIndex('telefono', 'telefono',       {unique: false })
+        objectStore.createIndex('fecha', 'fecha',             {unique: false })
+        objectStore.createIndex('hora', 'hora',               {unique: false })
+        objectStore.createIndex('sintomas', 'sintomas',       {unique: false })
+        objectStore.createIndex('id', 'id',                   {unique: true })
+        
+    }
+
 
 }
