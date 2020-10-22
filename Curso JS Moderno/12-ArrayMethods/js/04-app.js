@@ -19,4 +19,3 @@ resultado = carrito.filter(producto => producto.precio > 300)
 resultado = carrito.filter(producto => producto.precio < 600)
 
 resultado = carrito.filter(producto => producto.nombre !== 'Teclado')
-console.log(resultado)
