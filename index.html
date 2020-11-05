@@ -3,14 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <meta name=”description” content="Kervis Vasque, Porgramador Web, Desarrollo de paginas Web a medida"/>
+    <meta name=”keywords” content="kervis vasquez, Programador web, worpdress, trabajo, portafolio" />
+    <title>kervisvasquez.onlione</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <a href="" class="logo">kervisvasquez.online</a>
+        <div class="toggle" onclick="toggleMenu()"></div>
+        <ul class="menu">
+            <li><a href="#home">Inicio</a></li>
+            <li><a href="#sobre-mi">Sobre mi</a></li>
+      
+            <li><a href="#trabajos">Trabajos</a></li>           
+        </ul>
+    </header>
+    <section class="banner" id="home">
+       <div class="txtBx">
+           <h2>Hola, mi nombre es <br> <span>Kervis Vasquez</span></h2>
+           <h3>Desarrollador Web, Wordpress Developers, Laravel Developers, JavaScript developers</h3>
+           <a href="#sobre-mi" class="btn">Acerca de mi</a>
+       </div> 
+    </section>
+   
+    <section class="work" id="trabajos">
+        <div class="heading">
+            <h2>Portafolio</h2>
+            <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, ratione!
+            </p>
+        </div>
+        <div class="content">
+            <div class="workBx">
+                <img src="img/product1.jpg" alt="">
+            </div>
+            <div class="workBx">
+                <img src="img/product2.jpg" alt="">
+            </div>
+            <div class="workBx">
+                <img src="img/product3.jpg" alt="">
+            </div>
+            <div class="workBx">
+                <img src="img/product4.jpg" alt="">
+            </div>
+        </div>
+  </section>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <a href="https://api.whatsapp.com/send?phone=584244444161&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Servicios." class="float" target="_blank">
+    <i class="fa fa-whatsapp my-float"></i>
+    </a>
+      
+    <div class="copyrigth">
+        <p>copyright &#169; 2020 kervisvasquez.online. Todos Los Derechos Reservado.</p>
+    </div>
+    <script>
+        window.addEventListener('scroll', () => {
+            var header = document.querySelector('header')
+            header.classList.toggle('sticky', window.scrollY > 0)
 
-    <div id="app"></div>
-    
-    <script src="js.js"></script>
-    <script src="eventos/eventos.js"></script>
+        })
+        function toggleMenu()
+        {
+            var menuToggle = document.querySelector('.toggle')
+            var menu = document.querySelector('.menu')
+            menuToggle.classList.toggle('active')
+            menu.classList.toggle('active')
+        }
+    </script>
 </body>
 </html>
