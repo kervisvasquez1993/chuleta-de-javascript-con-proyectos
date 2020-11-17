@@ -1,6 +1,7 @@
 const criptomonedaSelect = document.querySelector('#criptomonedas')
 const monedaSelect = document.querySelector('#moneda')
 const formulario = document.querySelector('#formulario')
+const resultado = document.querySelector('#resultado')
 const objBusqueda = {
     moneda       : '',
     criptomoneda : ''
@@ -78,6 +79,7 @@ function consultarApi()
 {
     const { moneda, criptomoneda } = objBusqueda
     const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}`
+    mostrarSpiner()
     fetch(url)
     .then( respuesta  => respuesta.json())
     .then( cotizacion => {
@@ -88,5 +90,49 @@ function consultarApi()
 
 function mostrarCotizacion(cotizacion)
 {
-    console.log(cotizacion)
+    limpiarHTML()
+    const {PRICE, HIGHDAY, LOWDAY, CHANGEPCT24HOUR, LASTUPDATE } = cotizacion
+    const precio = document.createElement('p')
+    precio.classList.add('precio')
+    precio.innerHTML = ` El Precio es: <span>${PRICE}</span>`
+    
+    const precioAlto = document.createElement('p')
+    precioAlto.innerHTML = ` El precio mas alto del dia <span>${HIGHDAY}</span>`
+
+    const precioBajo = document.createElement('p')
+    precioBajo.innerHTML = ` El precio mas Bajo del dia <span>${LOWDAY}</span>`
+
+    const variacion = document.createElement('p')
+    variacion.innerHTML = `Variacion en las Ultimas 24 horas <span>${CHANGEPCT24HOUR}%</span>`
+
+    const UPDATE = document.createElement('p')
+    UPDATE.innerHTML = `ÚLTIMA ACTUALIZACION <span>${LASTUPDATE}</span>`
+    resultado.appendChild(precio)
+    resultado.appendChild(precioAlto)
+    resultado.appendChild(precioBajo)
+    resultado.appendChild(variacion)
+    resultado.appendChild(UPDATE)
 }
+
+ function limpiarHTML()
+ {
+     while(resultado.firstChild)
+     {
+         resultado.removeChild(resultado.firstChild)
+     }
+ }
+
+ function mostrarSpiner()
+ {
+     limpiarHTML()
+     const spiner = document.createElement('div')
+     spiner.classList.add('spinner')
+     spiner.innerHTML = `
+     <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+     </div>
+     `
+     resultado.appendChild(spiner)
+ }
