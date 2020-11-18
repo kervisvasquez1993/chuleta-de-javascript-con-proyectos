@@ -5,7 +5,7 @@ function descargarNuevosClientes()
 
         setTimeout( ()=> {
             resolve('los clientes fueron descargados')
-        }, 3000)
+        }, 5000)
     })
 }
 
@@ -16,14 +16,22 @@ function descargarNuevosPedidos()
 
         setTimeout( ()=> {
             resolve('los pedidos fueron descargados')
-        }, 1500)
+        }, 2000)
     })
 }
 const app = async () => {
 
     try{
-        const cliente = await descargarNuevosClientes()
+        /*const cliente = await descargarNuevosClientes()
         console.log(cliente)
+
+        const pedido = await descargarNuevosPedidos()
+        console.log(pedido)
+        */
+       const respuesta = await Promise.all([descargarNuevosClientes(), descargarNuevosPedidos()])
+
+       console.log(respuesta[0])
+       console.log(respuesta[1])
     }catch(err)
     {
         console.log(err)
