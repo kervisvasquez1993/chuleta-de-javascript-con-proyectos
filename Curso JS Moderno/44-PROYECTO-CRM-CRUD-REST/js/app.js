@@ -1,8 +1,9 @@
-import {obtenerClientes} from './API.js'
+import {obtenerClientes, eliminarCliente} from './API.js'
 
 (function (){
     const listado = document.querySelector('#listado-clientes');
-    console.log(listado)
+
+    listado.addEventListener('click', confirmarEliminar)
     document.addEventListener('DOMContentLoaded', mostrarClientes);
 
      async function mostrarClientes()
@@ -33,5 +34,19 @@ import {obtenerClientes} from './API.js'
 
 
         });
+    }
+    function confirmarEliminar(e)
+    {
+        if(e.target.classList.contains('eliminar'))
+        {
+            const clienteId = parseInt(e.target.dataset.cliente)
+            const confirmar = confirm('¿Deseas eliminar este registro?')
+            if(confirmar)
+            {
+                eliminarCliente(clienteId)
+            }
+            
+        }
+
     }
 })()

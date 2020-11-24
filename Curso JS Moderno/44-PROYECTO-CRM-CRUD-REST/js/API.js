@@ -29,3 +29,15 @@ export  const obtenerClientes = async () => {
         console.log(e)
     }
 }
+
+//elimina un cliente
+export const eliminarCliente = async clienteId => {
+    try{
+        await fetch(`${url}/${clienteId}`,{
+            method: 'DELETE',
+
+        })
+    }
+     catch(e)
+     {console.log(e)}
+}
