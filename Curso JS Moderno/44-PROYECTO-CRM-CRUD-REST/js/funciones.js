@@ -1,6 +1,6 @@
 export function mostrarAlerta(msj)
 {
-    console.log('hol')
+  
     const alerta = document.querySelector('.bg-red-100')
     if(!alerta)
     {
@@ -16,4 +16,9 @@ export function mostrarAlerta(msj)
             alerta.remove();
         },3000)
     }
+}
+
+export function validar(obj)
+{
+    return !Object.values(obj).every(input => input !== '' )
 }

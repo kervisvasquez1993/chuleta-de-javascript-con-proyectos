@@ -1,18 +1,18 @@
 {
   "clientes": [
     {
-      "nombre": "Juan NUEVO!",
+      "nombre": "kervis biodynamics",
       "email": "correo2@correo.com",
       "telefono": "12",
       "empresa": "12212",
       "id": 26
     },
     {
-      "nombre": "valencia",
+      "nombre": "kervis vasquez",
       "email": "test1@correo.com",
-      "telefono": "0424",
-      "empresa": "test",
-      "id": 27
+      "telefono": "123456789",
+      "empresa": "medicom venezuela C.A",
+      "id": 28
     }
   ]
 }
