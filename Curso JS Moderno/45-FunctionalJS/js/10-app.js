@@ -64,5 +64,6 @@ console.log("<=======test======>");
 const empleado = Empleado('Pedro', null, 'programador')
 empleado.mostrarNombre();
 empleado.agregarEmail('correo@correo.com') // guardar el email
+empresa.mostrarEmail();
 //empleado.mostraEmail();
 // esto sirve para crear funcones de uso general e ir usandola en tus objetos
